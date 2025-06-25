@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>趣味数学进阶</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #16a085;
+            margin-top: 20px;
+        }
+        .section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .question {
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 15px 0 5px 0;
+        }
+        .answer {
+            color: #27ae60;
+            margin-left: 20px;
+            padding-left: 15px;
+            border-left: 2px solid #2ecc71;
+        }
+        .rule {
+            background-color: #f1f9fe;
+            padding: 12px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 4px solid #3498db;
+        }
+        
+        /* 3D立方体动画 */
+        .cube-container {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            perspective: 800px;
+        }
+        .cube {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            animation: rotateCube 10s infinite linear;
+        }
+        .cube-face {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            border: 2px solid #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            font-weight: bold;
+            color: white;
+            opacity: 0.8;
+        }
+        .front { 
+            background-color: rgba(231, 76, 60, 0.8);
+            transform: translateZ(100px); 
+        }
+        .back { 
+            background-color: rgba(52, 152, 219, 0.8);
+            transform: rotateY(180deg) translateZ(100px); 
+        }
+        .right { 
+            background-color: rgba(46, 204, 113, 0.8);
+            transform: rotateY(90deg) translateZ(100px); 
+        }
+        .left { 
+            background-color: rgba(155, 89, 182, 0.8);
+            transform: rotateY(-90deg) translateZ(100px); 
+        }
+        .top { 
+            background-color: rgba(241, 196, 15, 0.8);
+            transform: rotateX(90deg) translateZ(100px); 
+        }
+        .bottom { 
+            background-color: rgba(230, 126, 34, 0.8);
+            transform: rotateX(-90deg) translateZ(100px); 
+        }
+        @keyframes rotateCube {
+            from { transform: rotateX(0) rotateY(0); }
+            to { transform: rotateX(360deg) rotateY(360deg); }
+        }
+        
+        /* 图形规律动画 */
+        .pattern-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .pattern-item {
+            width: 60px;
+            height: 60px;
+            margin: 0 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            animation: float 3s infinite ease-in-out;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+        .red { background-color: #e74c3c; color: white; }
+        .blue { background-color: #3498db; color: white; }
+        .green { background-color: #2ecc71; color: white; }
+        .triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+        .circle { border-radius: 50%; }
+        .square { }
+        
+        /* 乘法动画 */
+        .multiplication-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .multiplication-group {
+            display: flex;
+            margin: 10px;
+            align-items: center;
+        }
+        .multiplication-item {
+            width: 40px;
+            height: 40px;
+            background-color: #3498db;
+            margin: 2px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        
+        /* 除法动画 */
+        .division-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .division-items {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 300px;
+            margin-bottom: 10px;
+        }
+        .division-item {
+            width: 40px;
+            height: 40px;
+            background-color: #2ecc71;
+            margin: 5px;
+            border-radius: 4px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        .division-group {
+            display: flex;
+            margin: 10px;
+            padding: 10px;
+            border: 1px dashed #7f8c8d;
+            border-radius: 8px;
+        }
+        
+        /* 排序动画 */
+        .sorting-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .sorting-item {
+            width: 60px;
+            height: 60px;
+            background-color: #9b59b6;
+            margin: 0 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: all 0.5s;
+        }
+        .sorting-item.highlight {
+            transform: scale(1.2);
+            box-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
+        }
+    </style>
+</head>
+<body>
+    <h1>趣味数学进阶</h1>
+    
+    <div class="section">
+        <h2>多角度观察进阶</h2>
+        
+        <h3>1. 立体图形视图</h3>
+        <div class="cube-container">
+            <div class="cube">
+                <div class="cube-face front">正面</div>
+                <div class="cube-face back">背面</div>
+                <div class="cube-face right">右侧</div>
+                <div class="cube-face left">左侧</div>
+                <div class="cube-face top">顶面</div>
+                <div class="cube-face bottom">底面</div>
+            </div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            正面、侧面、顶面观察视角不同，图形形状与排列对应。<br>
+            通过观察可判断图形真实结构。
+        </div>
+        
+        <div class="example">
+            <div class="question">正面看有3个小正方体，侧面看有2个，顶面看有4个，最少有几个小正方体？</div>
+            <div class="answer">4个。</div>
+            
+            <div class="question">从正面看是长方形，侧面是正方形，说明立体图形是？</div>
+            <div class="answer">长方体。</div>
+            
+            <div class="question">顶面看到4个小正方体排成正方形，侧面看到2个，底面看见3个，图形结构如何？</div>
+            <div class="answer">至少有4个小正方体层叠。</div>
+        </div>
+        
+        <h3>2. 图形规律进阶</h3>
+        <div class="pattern-container">
+            <div class="pattern-item red triangle">▲</div>
+            <div class="pattern-item blue circle">●</div>
+            <div class="pattern-item green square">■</div>
+            <div class="pattern-item red triangle">▲</div>
+            <div class="pattern-item blue circle">●</div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            多维度规律包括颜色、形状、位置综合变化。<br>
+            需要结合所有属性判断下一图形。
+        </div>
+        
+        <div class="example">
+            <div class="question">颜色红→蓝→绿循环，第7个图形是什么颜色？</div>
+            <div class="answer">蓝色。</div>
+            
+            <div class="question">形状由三角变圆形再变方形，依此类推，第5个图形是什么？</div>
+            <div class="answer">圆形。</div>
+            
+            <div class="question">图形位置每次向右移动2格，第4个图形位置是第几格？</div>
+            <div class="answer">第6格。</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>有趣的乘法</h2>
+        
+        <h3>1. 乘法算式转换</h3>
+        <div class="multiplication-container">
+            <div class="multiplication-group">
+                <div class="multiplication-item">4</div>
+                <div class="multiplication-item">+</div>
+                <div class="multiplication-item">4</div>
+                <div class="multiplication-item">+</div>
+                <div class="multiplication-item">4</div>
+                <div class="multiplication-item">+</div>
+                <div class="multiplication-item">4</div>
+                <div class="multiplication-item">+</div>
+                <div class="multiplication-item">4</div>
+                <div class="multiplication-item">=</div>
+                <div class="multiplication-item">20</div>
+            </div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            连加式可以转换成乘法表示，如a + a + ... + a（n个）= n × a。<br>
+            利用乘法简化重复加法计算。
+        </div>
+        
+        <div class="example">
+            <div class="question">4 + 4 + 4 + 4 + 4等于多少？</div>
+            <div class="answer">20。</div>
+            
+            <div class="question">5只小猫每只吃4条鱼，共吃多少条鱼？</div>
+            <div class="answer">20条。</div>
+            
+            <div class="question">8次相同动作，每次得5分，总得多少分？</div>
+            <div class="answer">40分。</div>
+        </div>
+        
+        <h3>2. 实际应用</h3>
+        <div class="multiplication-container">
+            <div class="multiplication-group">
+                <div class="multiplication-item">3</div>
+                <div class="multiplication-item">×</div>
+                <div class="multiplication-item">12</div>
+                <div class="multiplication-item">=</div>
+                <div class="multiplication-item">36</div>
+            </div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            乘法用于求多组同样数量的总和。<br>
+            将问题拆分成单组数量乘以组数。
+        </div>
+        
+        <div class="example">
+            <div class="question">3箱苹果，每箱12个，共有多少个苹果？</div>
+            <div class="answer">36个。</div>
+            
+            <div class="question">7个孩子每人2支铅笔，共有多少支？</div>
+            <div class="answer">14支。</div>
+            
+            <div class="question">4排座位，每排8个座位，共多少座位？</div>
+            <div class="answer">32个。</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>有趣的除法</h2>
+        
+        <h3>1. 平均分配</h3>
+        <div class="division-container">
+            <div class="division-items">
+                <div class="division-item">12</div>
+                <div class="division-item">÷</div>
+                <div class="division-item">3</div>
+                <div class="division-item">=</div>
+                <div class="division-item">4</div>
+            </div>
+            <div class="division-group">
+                <div class="division-item">4</div>
+                <div class="division-item">4</div>
+                <div class="division-item">4</div>
+            </div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            将总数平均分成几份，计算每份数量。<br>
+            除法是平均分配的基础。
+        </div>
+        
+        <div class="example">
+            <div class="question">12支铅笔分成3袋，每袋几支？</div>
+            <div class="answer">4支。</div>
+            
+            <div class="question">24个苹果平均分给6个人，每人多少？</div>
+            <div class="answer">4个。</div>
+            
+            <div class="question">15颗糖分给5个孩子，每人分几颗？</div>
+            <div class="answer">3颗。</div>
+        </div>
+        
+        <h3>2. 反向计算</h3>
+        <div class="division-container">
+            <div class="division-items">
+                <div class="division-item">8</div>
+                <div class="division-item">÷</div>
+                <div class="division-item">2</div>
+                <div class="division-item">=</div>
+                <div class="division-item">4</div>
+            </div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            已知每份数量，计算需要多少份。<br>
+            总数除以单份数量即为份数。
+        </div>
+        
+        <div class="example">
+            <div class="question">每袋放2支铅笔，8支铅笔需要多少袋？</div>
+            <div class="answer">4袋。</div>
+            
+            <div class="question">每盒装5个苹果，20个苹果需要几盒？</div>
+            <div class="answer">4盒。</div>
+            
+            <div class="question">每包有3颗糖，15颗糖需要多少包？</div>
+            <div class="answer">5包。</div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>画图推理</h2>
+        
+        <h3>1. 逻辑排序</h3>
+        <div class="sorting-container">
+            <div class="sorting-item">甲</div>
+            <div class="sorting-item highlight">乙</div>
+            <div class="sorting-item">丙</div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            根据条件排列顺序或名次。<br>
+            利用已知信息排除不可能的顺序。<br>
+            通过比较推断未知位置。
+        </div>
+        
+        <div class="example">
+            <div class="question">小燕子第2名，蒙蒙第3名，大雁第几名？</div>
+            <div class="answer">第1名。</div>
+            
+            <div class="question">比赛中，甲比乙快，乙比丙慢，谁最快？</div>
+            <div class="answer">甲。</div>
+            
+            <div class="question">三人跑步，丁不第1，戊不是第3，谁第2？</div>
+            <div class="answer">戊。</div>
+        </div>
+        
+        <h3>2. 比较推理</h3>
+        <div class="sorting-container">
+            <div class="sorting-item">小明</div>
+            <div class="sorting-item">小红</div>
+            <div class="sorting-item highlight">小强</div>
+        </div>
+        
+        <div class="rule">
+            <strong>运算法则：</strong><br>
+            分析比较关系确定大小、高矮或数量。<br>
+            排除矛盾选项确定正确结论。
+        </div>
+        
+        <div class="example">
+            <div class="question">饭饭比旦旦矮，旦旦比乐乐高，谁最矮？</div>
+            <div class="answer">乐乐。</div>
+            
+            <div class="question">小明比小红高，小红比小强矮，谁最高？</div>
+            <div class="answer">小明。</div>
+            
+            <div class="question">猫比狗轻，狗比兔重，谁最重？</div>
+            <div class="answer">兔。</div>
+        </div>
+    </div>
+
+    <script>
+        // 排序动画
+        const sortingItems = document.querySelectorAll('.sorting-item');
+        let currentHighlight = 1;
+        
+        setInterval(() => {
+            sortingItems.forEach(item => item.classList.remove('highlight'));
+            currentHighlight = (currentHighlight + 1) % sortingItems.length;
+            sortingItems[currentHighlight].classList.add('highlight');
+        }, 1000);
+    </script>
+</body>
+</html>
