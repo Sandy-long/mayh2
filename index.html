@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>趣味数学</title>
+    <title>趣味数学2</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -43,11 +43,44 @@
             color: #e74c3c;
             margin: 15px 0 5px 0;
         }
+        .answer-container {
+            background: linear-gradient(135deg, #f0fff4 0%, #e6fffa 100%);
+            border: 1px solid #d1fae5;
+            border-radius: 8px;
+            padding: 5px 15px;
+            margin: 15px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .answer-container:hover {
+            background: linear-gradient(135deg, #dcffe4 0%, #c6f6d5 100%);
+            transform: translateX(5px);
+        }
+        .answer-prompt {
+            color: #10b981;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+        }
+        .answer-prompt:before {
+            content: "✨";
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
         .answer {
-            color: #27ae60;
+            color: #0f9d58;
             margin-left: 20px;
-            padding-left: 15px;
-            border-left: 2px solid #2ecc71;
+            padding: 10px 15px;
+            background-color: rgba(16, 185, 129, 0.1);
+            border-left: 3px solid #10b981;
+            border-radius: 0 8px 8px 0;
+            display: none;
+            font-weight: bold;
+            animation: fadeIn 0.5s ease;
+        }
+        .show-answer .answer {
+            display: block;
         }
         .rule {
             background-color: #f1f9fe;
@@ -56,8 +89,6 @@
             margin: 15px 0;
             border-left: 4px solid #3498db;
         }
-        
-        /* 3D立方体动画 */
         .cube-container {
             width: 200px;
             height: 200px;
@@ -84,36 +115,38 @@
             color: white;
             opacity: 0.8;
         }
-        .front { 
+        .front {
             background-color: rgba(231, 76, 60, 0.8);
-            transform: translateZ(100px); 
+            transform: translateZ(100px);
         }
-        .back { 
+        .back {
             background-color: rgba(52, 152, 219, 0.8);
-            transform: rotateY(180deg) translateZ(100px); 
+            transform: rotateY(180deg) translateZ(100px);
         }
-        .right { 
+        .right {
             background-color: rgba(46, 204, 113, 0.8);
-            transform: rotateY(90deg) translateZ(100px); 
+            transform: rotateY(90deg) translateZ(100px);
         }
-        .left { 
+        .left {
             background-color: rgba(155, 89, 182, 0.8);
-            transform: rotateY(-90deg) translateZ(100px); 
+            transform: rotateY(-90deg) translateZ(100px);
         }
-        .top { 
+        .top {
             background-color: rgba(241, 196, 15, 0.8);
-            transform: rotateX(90deg) translateZ(100px); 
+            transform: rotateX(90deg) translateZ(100px);
         }
-        .bottom { 
+        .bottom {
             background-color: rgba(230, 126, 34, 0.8);
-            transform: rotateX(-90deg) translateZ(100px); 
+            transform: rotateX(-90deg) translateZ(100px);
         }
         @keyframes rotateCube {
-            from { transform: rotateX(0) rotateY(0); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
+            from {transform: rotateX(0) rotateY(0);} 
+            to {transform: rotateX(360deg) rotateY(360deg);}
         }
-        
-        /* 图形规律动画 */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
         .pattern-container {
             display: flex;
             justify-content: center;
@@ -130,17 +163,28 @@
             animation: float 3s infinite ease-in-out;
         }
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            0%, 100% {transform: translateY(0);}
+            50% {transform: translateY(-10px);}
         }
-        .red { background-color: #e74c3c; color: white; }
-        .blue { background-color: #3498db; color: white; }
-        .green { background-color: #2ecc71; color: white; }
-        .triangle { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
-        .circle { border-radius: 50%; }
-        .square { }
-        
-        /* 乘法动画 */
+        .red {
+            background-color: #e74c3c;
+            color: white;
+        }
+        .blue {
+            background-color: #3498db;
+            color: white;
+        }
+        .green {
+            background-color: #2ecc71;
+            color: white;
+        }
+        .triangle {
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+        }
+        .circle {
+            border-radius: 50%;
+        }
+        .square {}
         .multiplication-container {
             display: flex;
             flex-wrap: wrap;
@@ -166,11 +210,9 @@
             animation: pulse 2s infinite;
         }
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% {transform: scale(1);}
+            50% {transform: scale(1.1);}
         }
-        
-        /* 除法动画 */
         .division-container {
             display: flex;
             flex-direction: column;
@@ -204,8 +246,6 @@
             border: 1px dashed #7f8c8d;
             border-radius: 8px;
         }
-        
-        /* 排序动画 */
         .sorting-container {
             display: flex;
             justify-content: center;
@@ -235,7 +275,6 @@
     
     <div class="section">
         <h2>多角度观察进阶</h2>
-        
         <h3>1. 立体图形视图</h3>
         <div class="cube-container">
             <div class="cube">
@@ -247,33 +286,36 @@
                 <div class="cube-face bottom">底面</div>
             </div>
         </div>
-        
         <div class="rule">
             <strong>运算法则：</strong><br>
             正面、侧面、顶面观察视角不同，图形形状与排列对应。<br>
             通过观察可判断图形真实结构。
         </div>
-        <br>
         <div class="example">
             <div class="question">正面看有3个小正方体，侧面看有2个，顶面看有4个，最少有几个小正方体？</div>
-            <div class="answer">4个</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">4个</div>
+            </div>
             
             <div class="question">从正面看是长方形，侧面是正方形，说明立体图形是？</div>
-            <div class="answer">长方体</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">长方体</div>
+            </div>
             
             <div class="question">顶面看到4个小正方体排成正方形，侧面看到2个，底面看见3个，图形结构如何？</div>
-            <div class="answer">至少有4个小正方体层叠</div>
-			 <div class="question">一个图形：
-
-正面看：■ ■ ■
-侧面看：■ □
-顶面看：■ ■
-问：最少需要几个方块？</div>
-            <div class="answer">​​3个​​（构造示例：层1两个并排，层1第三个与层2的一个垂直堆叠）</div>
-			
-	<br>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">至少有4个小正方体层叠</div>
+            </div>
+            
+            <div class="question">一个图形：正面看：■ ■ ■ 侧面看：■ □ 顶面看：■ ■ 问：最少需要几个方块？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">3个（构造示例：层1两个并排，层1第三个与层2的一个垂直堆叠）</div>
+            </div>
         </div>
-        
         <h3>2. 图形规律进阶</h3>
         <div class="pattern-container">
             <div class="pattern-item red triangle">▲</div>
@@ -282,119 +324,116 @@
             <div class="pattern-item red triangle">▲</div>
             <div class="pattern-item blue circle">●</div>
         </div>
-        
         <div class="rule">
             <strong>运算法则：</strong><br>
             多维度规律包括颜色、形状、位置综合变化。<br>
             需要结合所有属性判断下一图形。
         </div>
-        
         <div class="example">
-            <div class="question">颜色按「红→黄→蓝」循环排列，问：
-① 第4个是什么颜色？
-② 第10个是什么颜色？</div>
-            <div class="answer">都是黄色</div>
+            <div class="question">颜色按「红→黄→蓝」循环排列，问：① 第4个是什么颜色？② 第10个是什么颜色？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">都是黄色</div>
+            </div>
             
-            <div class="question">颜色和形状同时循环：
-颜色：红→蓝→绿，
-形状：△→○→□，
-问：第4个图形的颜色和形状是什么？</div>
-            <div class="answer">蓝色圆形</div>
+            <div class="question">颜色和形状同时循环：颜色：红→蓝→绿，形状：△→○→□，问：第4个图形的颜色和形状是什么？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">蓝色圆形</div>
+            </div>
             
-            <div class="question">图形按以下规律变化：
-颜色：红→蓝→绿（循环），
-形状：△→○→□→☆（循环），
-位置：每次向右移动2格，
-问：第5个图形的颜色、形状及位置分别是什么？</div>
-            <div class="answer">蓝色△，第8格</div>
+            <div class="question">图形按以下规律变化：颜色：红→蓝→绿（循环），形状：△→○→□→☆（循环），位置：每次向右移动2格，问：第5个图形的颜色、形状及位置分别是什么？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">蓝色△，第8格</div>
+            </div>
         </div>
     </div>
-<br>
+
     <div class="section">
         <h2>画图推理</h2>
-        
         <h3>1. 逻辑排序</h3>
         <div class="sorting-container">
             <div class="sorting-item">甲</div>
             <div class="sorting-item highlight">乙</div>
             <div class="sorting-item">丙</div>
         </div>
-        
         <div class="rule">
             <strong>运算法则：</strong><br>
             根据条件排列顺序或名次。<br>
             利用已知信息排除不可能的顺序。<br>
             通过比较推断未知位置。
         </div>
-        <br>
         <div class="example">
-            <div class="question">四人比赛：
-
-甲说：我不是第1名，
-乙说：丁比我快，
-丙说：我是第3名，
-丁说：乙说谎，
-已知只有一人说谎，问实际名次。</div>
-            <div class="answer">A或B</div>
+            <div class="question">四人比赛：甲说：我不是第1名，乙说：丁比我快，丙说：我是第3名，丁说：乙说谎，已知只有一人说谎，问实际名次。</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">A或B</div>
+            </div>
             
-            <div class="question">三人比赛：
-
-甲不是第1名，
-乙比丙快，
-丙比甲快，
-问：名次是什么？</div>
-            <div class="answer">乙第1，丁第2，丙第3，甲第4​​</div>
+            <div class="question">三人比赛：甲不是第1名，乙比丙快，丙比甲快，问：名次是什么？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">乙第1，丁第2，丙第3，甲第4</div>
+            </div>
             
-            <div class="question">若“甲比乙快，乙比丙快，丙比甲快”，是否矛盾？</div>
-            <div class="answer">是</div>
+            <div class="question">若"甲比乙快，乙比丙快，丙比甲快"，是否矛盾？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">是</div>
+            </div>
         </div>
-        <br>
         <h3>2. 比较推理</h3>
         <div class="sorting-container">
             <div class="sorting-item">小明</div>
             <div class="sorting-item">小红</div>
             <div class="sorting-item highlight">小强</div>
         </div>
-        
         <div class="rule">
             <strong>运算法则：</strong><br>
             分析比较关系确定大小、高矮或数量。<br>
             排除矛盾选项确定正确结论。
         </div>
-        <br>
         <div class="example">
             <div class="question">猫比狗轻，狗比兔重，谁最重？</div>
-            <div class="answer">狗最重</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">狗最重</div>
+            </div>
             
-            <div class="question">已知：
-
-甲比乙高，但比丙矮，
-丁比乙高，但比甲矮，
-戊比丙高，但比丁矮，
-问：五人从高到矮的排序是什么？</div>
-            <div class="answer">丙 > 甲 > 戊 > 丁 > 乙</div>
+            <div class="question">已知：甲比乙高，但比丙矮，丁比乙高，但比甲矮，戊比丙高，但比丁矮，问：五人从高到矮的排序是什么？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">丙 > 甲 > 戊 > 丁 > 乙</div>
+            </div>
             
-            <div class="question">四支球队比赛，已知：
-
-火箭队比湖人队名次高，
-勇士队不是第2名，
-湖人队比公牛队名次低，
-公牛队不是第1名，
-问：排名顺序是什么？</div>
-            <div class="answer"> ​​火箭(1) > 公牛(2) > 勇士(3) > 湖人(4)​</div>
+            <div class="question">四支球队比赛，已知：火箭队比湖人队名次高，勇士队不是第2名，湖人队比公牛队名次低，公牛队不是第1名，问：排名顺序是什么？</div>
+            <div class="answer-container">
+                <div class="answer-prompt">点击显示答案</div>
+                <div class="answer">火箭(1) > 公牛(2) > 勇士(3) > 湖人(4)</div>
+            </div>
         </div>
     </div>
 
     <script>
-        // 排序动画
-        const sortingItems = document.querySelectorAll('.sorting-item');
-        let currentHighlight = 1;
-        
-        setInterval(() => {
-            sortingItems.forEach(item => item.classList.remove('highlight'));
-            currentHighlight = (currentHighlight + 1) % sortingItems.length;
-            sortingItems[currentHighlight].classList.add('highlight');
-        }, 1000);
+        document.addEventListener('DOMContentLoaded', function() {
+            // 答案显示功能
+            document.body.addEventListener('click', function(e) {
+                const container = e.target.closest('.answer-container');
+                if(container) {
+                    container.classList.toggle('show-answer');
+                }
+            });
+            
+            // 高亮功能
+            const sortingItems = document.querySelectorAll('.sorting-item');
+            let currentHighlight = 1;
+            setInterval(() => {
+                sortingItems.forEach(item => item.classList.remove('highlight'));
+                currentHighlight = (currentHighlight + 1) % sortingItems.length;
+                sortingItems[currentHighlight].classList.add('highlight');
+            }, 1000);
+        });
     </script>
 </body>
 </html>
